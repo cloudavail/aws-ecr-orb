@@ -193,15 +193,15 @@ workflows:
           auth:
             - aws-cli/setup:
                 role_arn: arn:aws:iam::187376578462:role/CircleCI_Orb_Role
-                profile_name: "Default" #"OIDC-User"
+                profile_name: "Default"
           attach_workspace: true
           workspace_root: workspace
           repo: aws-ecr-orb-${CIRCLE_SHA1:0:7}-public_registry
           create_repo: true
           region: "us-west-2"
-          profile_name: "Default" #"OIDC-User"
+          profile_name: "Default"
           context: [CPE-OIDC]
-          tag: integration
+          tag: integration,myECRRepoTag
           dockerfile: Dockerfile
           path: ./sample
           extra_build_args: --compress
@@ -223,10 +223,10 @@ workflows:
           auth:
             - aws-cli/setup:
                 role_arn: arn:aws:iam::187376578462:role/CircleCI_Orb_Role
-                profile_name: "OIDC-User"
+                profile_name: "Default"
           attach_workspace: true
           region: "us-west-2"
-          profile_name: "OIDC-User"
+          profile_name: "Default"
           context: [CPE-OIDC]
           workspace_root: workspace
           repo: aws-ecr-orb-${CIRCLE_SHA1:0:7}-named-profile
@@ -247,10 +247,10 @@ workflows:
           auth:
             - aws-cli/setup:
                 role_arn: arn:aws:iam::187376578462:role/CircleCI_Orb_Role
-                profile_name: "OIDC-User"
+                profile_name: "Default"
           repo: aws-ecr-orb-${CIRCLE_SHA1:0:7}-named-profile
           region: "us-west-2"
-          profile_name: "OIDC-User"
+          profile_name: "Default"
           context: [CPE-OIDC]
           source_tag: integration
           target_tag: latest
@@ -261,10 +261,10 @@ workflows:
           auth:
             - aws-cli/setup:
                 role_arn: arn:aws:iam::187376578462:role/CircleCI_Orb_Role
-                profile_name: "OIDC-User"
+                profile_name: "Default"
           repo: aws-ecr-orb-${CIRCLE_SHA1:0:7}-named-profile
           region: "us-west-2"
-          profile_name: "OIDC-User"
+          profile_name: "Default"
           context: [CPE-OIDC]
           source_tag: integration
           target_tag: alpha,latest
@@ -272,7 +272,7 @@ workflows:
           post-steps:
             - run:
                 name: "Delete repository"
-                command: aws ecr delete-repository --repository-name aws-ecr-orb-${CIRCLE_SHA1}-named-profile --force --profile OIDC-User
+                command: aws ecr delete-repository --repository-name aws-ecr-orb-${CIRCLE_SHA1}-named-profile --force --profile Default
           filters: *filters
           requires:
             - integration-test-tag-existing-image
@@ -281,10 +281,10 @@ workflows:
           auth:
             - aws-cli/setup:
                 role_arn: arn:aws:iam::187376578462:role/CircleCI_Orb_Role
-                profile_name: "OIDC-User"
+                profile_name: "Default"
           attach_workspace: true
           region: "us-west-2"
-          profile_name: "OIDC-User"
+          profile_name: "Default"
           context: [CPE-OIDC]
           workspace_root: workspace
           repo: aws-ecr-orb-${CIRCLE_SHA1:0:7}-skip_when_tags_exist-<<matrix.executor>>
@@ -305,10 +305,10 @@ workflows:
           auth:
             - aws-cli/setup:
                 role_arn: arn:aws:iam::187376578462:role/CircleCI_Orb_Role
-                profile_name: "OIDC-User"
+                profile_name: "Default"
           attach_workspace: true
           region: "us-west-2"
-          profile_name: "OIDC-User"
+          profile_name: "Default"
           context: [CPE-OIDC]
           workspace_root: workspace
           repo: aws-ecr-orb-${CIRCLE_SHA1}-skip_when_tags_exist-<<matrix.executor>>
@@ -321,7 +321,7 @@ workflows:
             - run:
                 name: "Delete repository"
                 command: |
-                  aws ecr delete-repository --repository-name aws-ecr-orb-${CIRCLE_SHA1}-skip_when_tags_exist-<<matrix.executor>> --force --profile OIDC-User
+                  aws ecr delete-repository --repository-name aws-ecr-orb-${CIRCLE_SHA1}-skip_when_tags_exist-<<matrix.executor>> --force --profile Default
           matrix:
             parameters:
               executor: ["amd64", "arm64"]
