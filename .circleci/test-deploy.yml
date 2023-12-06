@@ -154,7 +154,6 @@ workflows:
           auth:
             - aws-cli/setup:
                 role_arn: arn:aws:iam::187376578462:role/CircleCI_Orb_Role
-                role_session_name: ""
           attach_workspace: true
           workspace_root: workspace
           repo: aws-ecr-orb-${CIRCLE_SHA1:0:7}-default-profile
