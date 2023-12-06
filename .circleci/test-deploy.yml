@@ -201,12 +201,12 @@ workflows:
           region: "us-west-2"
           profile_name: "Default" #"OIDC-User"
           context: [CPE-OIDC]
-#          tag: integration,myECRRepoTag
+          tag: integration,myECRRepoTag
           dockerfile: Dockerfile
           path: ./sample
           extra_build_args: --compress
           executor: arm64
-          public_registry: true
+          public_registry: false
           post-steps:
             - run:
                 name: "Delete repository"
