@@ -201,7 +201,7 @@ workflows:
           region: "us-west-2"
           profile_name: "Default" #"OIDC-User"
           context: [CPE-OIDC]
-          tag: integration,myECRRepoTag
+          tag: "integration,myECRRepoTag"
           dockerfile: Dockerfile
           path: ./sample
           extra_build_args: --compress
@@ -210,7 +210,7 @@ workflows:
           post-steps:
             - run:
                 name: "Delete repository"
-                command: aws ecr-public delete-repository --region us-east-1 --repository-name aws-ecr-orb-${CIRCLE_SHA1}-public_registry --force --profile OIDC-User
+                command: aws ecr-public delete-repository --region us-east-1 --repository-name aws-ecr-orb-${CIRCLE_SHA1}-public_registry --force --profile Default
           platform: linux/arm64,linux/amd64
           filters: *filters
           requires: [pre-integration]
