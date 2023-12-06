@@ -201,7 +201,7 @@ workflows:
           region: "us-west-2"
           profile_name: "Default" #"OIDC-User"
           context: [CPE-OIDC]
-          tag: "integration,myECRRepoTag"
+#          tag: integration,myECRRepoTag
           dockerfile: Dockerfile
           path: ./sample
           extra_build_args: --compress
