@@ -115,7 +115,6 @@ workflows:
           workspace_root: workspace
           repo: aws-ecr-orb-${CIRCLE_SHA1}-build-test-then-push-with-buildx
           create_repo: true
-#          context: [CPE-OIDC]
           tag: alpha
           dockerfile: sample/Dockerfile
           path: workspace
@@ -137,7 +136,7 @@ workflows:
           workspace_root: workspace
           repo: aws-ecr-orb-${CIRCLE_SHA1:0:7}-multi-platform-without-push
           create_repo: true
-#          context: [CPE-OIDC]
+          context: [CPE-OIDC]
           tag: integration,myECRRepoTag
           dockerfile: sample/Dockerfile
           path: workspace
@@ -159,7 +158,7 @@ workflows:
           workspace_root: workspace
           repo: aws-ecr-orb-${CIRCLE_SHA1:0:7}-default-profile
           create_repo: true
-#          context: [CPE-OIDC]
+          context: [CPE-OIDC]
           tag: integration,myECRRepoTag
           dockerfile: sample/Dockerfile
           path: workspace
@@ -177,11 +176,11 @@ workflows:
           name: integration-test-cache-to-flag
           auth:
             - aws-cli/setup:
-                role_arn: arn:aws:iam::187376578462:role/CircleCI_Orb_Role
+                role_arn: "arn:aws:iam::187376578462:role/CircleCI_Orb_Role"
           attach_workspace: true
           workspace_root: workspace
           repo: aws-ecr-orb-${CIRCLE_SHA1:0:7}-cache-to-flag
-#          context: [CPE-OIDC]
+          context: [CPE-OIDC]
           dockerfile: sample/Dockerfile
           path: workspace
           extra_build_args: --cache-to type=local,dest=/tmp --compress
@@ -201,7 +200,7 @@ workflows:
           create_repo: true
           region: "us-west-2"
           profile_name: "OIDC-User"
-#          context: [CPE-OIDC]
+          context: [CPE-OIDC]
           tag: integration,myECRRepoTag
           dockerfile: Dockerfile
           path: ./sample
@@ -228,7 +227,7 @@ workflows:
           attach_workspace: true
           region: "us-west-2"
           profile_name: "OIDC-User"
-#          context: [CPE-OIDC]
+          context: [CPE-OIDC]
           workspace_root: workspace
           repo: aws-ecr-orb-${CIRCLE_SHA1:0:7}-named-profile
           create_repo: true
@@ -252,7 +251,7 @@ workflows:
           repo: aws-ecr-orb-${CIRCLE_SHA1:0:7}-named-profile
           region: "us-west-2"
           profile_name: "OIDC-User"
-#          context: [CPE-OIDC]
+          context: [CPE-OIDC]
           source_tag: integration
           target_tag: latest
           requires:
@@ -266,7 +265,7 @@ workflows:
           repo: aws-ecr-orb-${CIRCLE_SHA1:0:7}-named-profile
           region: "us-west-2"
           profile_name: "OIDC-User"
-#          context: [CPE-OIDC]
+          context: [CPE-OIDC]
           source_tag: integration
           target_tag: alpha,latest
           skip_when_tags_exist: true
@@ -286,7 +285,7 @@ workflows:
           attach_workspace: true
           region: "us-west-2"
           profile_name: "OIDC-User"
-#          context: [CPE-OIDC]
+          context: [CPE-OIDC]
           workspace_root: workspace
           repo: aws-ecr-orb-${CIRCLE_SHA1:0:7}-skip_when_tags_exist-<<matrix.executor>>
           create_repo: true
@@ -310,7 +309,7 @@ workflows:
           attach_workspace: true
           region: "us-west-2"
           profile_name: "OIDC-User"
-#          context: [CPE-OIDC]
+          context: [CPE-OIDC]
           workspace_root: workspace
           repo: aws-ecr-orb-${CIRCLE_SHA1}-skip_when_tags_exist-<<matrix.executor>>
           tag: integration,myECRRepoTag
