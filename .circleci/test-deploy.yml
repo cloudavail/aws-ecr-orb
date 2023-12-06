@@ -199,7 +199,7 @@ workflows:
           repo: aws-ecr-orb-${CIRCLE_SHA1:0:7}-public_registry
           create_repo: true
           region: "us-west-2"
-          profile_name: "OIDC-User"
+          profile_name: "Default" #"OIDC-User"
           context: [CPE-OIDC]
           tag: integration,myECRRepoTag
           dockerfile: Dockerfile
